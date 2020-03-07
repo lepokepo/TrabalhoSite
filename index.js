@@ -29,17 +29,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Rotas
 app.get('/eventos', function (req, res) {
-    connection.query('select * from evento',
+    connection.query('select * from evento where extract(month from date_hora)= extract(month from current_date)',
         function (error, results, fields) {
             if (error)
                 res.json;
             else {
-                res.json(results);
                 results.forEach(element => {
                     var data = element['date_hora']
-                    element['date_hora'] = dayjs(data).format('MMMM D, YYYY')
+                    element['date_hora'] = moment(data).format('LL')
                     console.log(element['date_hora'])
+
+
                 });
+                res.json(results);
                 console.log('executou /eventos')
             }
 

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>KLendario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <style>
+        .diasNm {
+            float: left;
+            font-size: 25px;
+            width: 150%;
+            background-color: rgba(0, 255, 255, 0.301)
+        }
+
+        .pad {
+            padding-left: 1.03% !important;
+            padding-bottom: 6.2%;
+
+        }
+
+        .border {
+            border-right: 1px solid rgb(196, 196, 196) !important;
+            border-bottom: 2px solid rgb(196, 196, 196) !important;
+            padding-right: 12.97%;
+        }
+
+        .fb {
+            float: right;
+
+        }
+    </style>
+
+    <script>
+        function addEvento(e) {
+            console.log('recebendo...');
+            console.log("aaaaaaaaaa " + e.id);
+            fetch('http://192.168.12.123/eventos', {
+                method: 'get',
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                console.log('Retorno:', data);
+                data.forEach(element => {
+
+                    var nome = element["nome"];
+                    var data = element["date_hora"];
+
+
+                    e.innerHTML += "<br><span>" + nome + "<br>" + data + "<span><br>";
+                });
+            });
+
+        }
+
+        function mostra(d) {
+
+        }
+    </script>
+
+</head>
+
+<body onload="">
+    <div class="row">
+        <div class="col-12" style="text-align: center; font-size: 50px;background-color: rgb(199, 199, 199); ">
+            <span>MARÇO</span>
+        </div>
+    </div>
+    <div class="row ">
+        <div class></div>
+        <div class="col-1 border">
+            <span class="diasNm">DOM</span>
+        </div>
+        <div class="col-1 border">
+            <span class="diasNm">SEG</span>
+        </div>
+        <div class="col-1 border">
+            <span class="diasNm">TER</span>
+        </div>
+        <div class="col-1 border">
+            <span class="diasNm">QUA</span>
+        </div>
+        <div class="col-1 border">
+            <span class="diasNm">QUI</span>
+        </div>
+        <div class="col-1 border">
+            <span class="diasNm">SEX</span>
+        </div>
+        <div class="col-1 border">
+            <span class="diasNm">SAB</span>
+        </div>
+    </div>
+    <div class="row">
+        <div id="1" class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">1</span>
+
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">2</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">3</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">4</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">5</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">6</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">7</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class></div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">8</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">9</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">10</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">11</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">12</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">13</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">14</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class></div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">15</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">16</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">17</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">18</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">19</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">20</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">21</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class></div>
+
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">22</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">23</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">24</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">25</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">26</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">27</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">28</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class></div>
+
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">29</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">30</span>
+        </div>
+        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="diasNm">31</span>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
