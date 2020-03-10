@@ -16,10 +16,14 @@
         crossorigin="anonymous"></script>
     <style>
         .diasNm {
-            float: left;
+            display: grid;
+        }
+
+        .diasNm>span {
+            /* float: left; */
+            display: table;
             font-size: 25px;
-            width: 150%;
-            background-color: rgba(0, 255, 255, 0.301)
+            background-color: rgba(0, 255, 255, 0.301);
         }
 
         .pad {
@@ -31,19 +35,48 @@
         .border {
             border-right: 1px solid rgb(196, 196, 196) !important;
             border-bottom: 2px solid rgb(196, 196, 196) !important;
-            padding-right: 12.97%;
+            /* padding-right: 12.97%; */
         }
 
         .fb {
             float: right;
-
+            width: 100%;
         }
     </style>
 
     <script>
+
         function addEvento(e) {
-            console.log('recebendo...');
-            console.log("aaaaaaaaaa " + e.id);
+            console.log('Recebendo...');
+
+            var hora = prompt("Nome do Evento");
+            var dataa = `${e.id}/03/2020, ${hora}`;
+
+            let ohno = {
+                "nomee": nome,
+                "dt_hr": data,
+            };
+
+
+            fetch('http://192.168.12.123/add_evento', {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+
+                body: JSON.stringify(ohno)
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                console.log('Retorno:', data);
+
+            });
+
+        }
+
+        function mostraEvento() {
+            console.log('Recebendo...');
             fetch('http://192.168.12.123/eventos', {
                 method: 'get',
             }).then(function (response) {
@@ -52,11 +85,21 @@
                 console.log('Retorno:', data);
                 data.forEach(element => {
 
+                    var id = element["idevento"];
                     var nome = element["nome"];
                     var data = element["date_hora"];
 
+                    var diaBanco = data.slice(3, 5)
+                    var hr = data.slice(12, 17)
+                    var d = 0;
 
-                    e.innerHTML += "<br><span>" + nome + "<br>" + data + "<span><br>";
+                    for (d; d <= 31; d++) {
+                        if (diaBanco == d) {
+                            var a = document.getElementById(d);
+                            a.innerHTML += `<span class="fb">${hr}  ${nome}</span>`;
+                        }
+
+                    }
                 });
             });
 
@@ -69,7 +112,7 @@
 
 </head>
 
-<body onload="">
+<body onload="mostraEvento()">
     <div class="row">
         <div class="col-12" style="text-align: center; font-size: 50px;background-color: rgb(199, 199, 199); ">
             <span>MARÇO</span>
@@ -77,137 +120,165 @@
     </div>
     <div class="row ">
         <div class></div>
-        <div class="col-1 border">
+        <div class="col border">
             <span class="diasNm">DOM</span>
         </div>
-        <div class="col-1 border">
+        <div class="col border">
             <span class="diasNm">SEG</span>
         </div>
-        <div class="col-1 border">
+        <div class="col border">
             <span class="diasNm">TER</span>
         </div>
-        <div class="col-1 border">
+        <div class="col border">
             <span class="diasNm">QUA</span>
         </div>
-        <div class="col-1 border">
+        <div class="col border">
             <span class="diasNm">QUI</span>
         </div>
-        <div class="col-1 border">
+        <div class="col border">
             <span class="diasNm">SEX</span>
         </div>
-        <div class="col-1 border">
+        <div class="col border">
             <span class="diasNm">SAB</span>
         </div>
     </div>
     <div class="row">
-        <div id="1" class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+        <div id="1" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
             <span class="diasNm">1</span>
 
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
+        <div id="2" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
             <span class="diasNm">2</span>
+            <div>
+
+            </div>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">3</span>
+        <div id="3" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">3</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">4</span>
+        <div id="4" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">4</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">5</span>
+        <div id="5" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">5</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">6</span>
+        <div id="6" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">6</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">7</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class></div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">8</span>
-        </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">9</span>
-        </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">10</span>
-        </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">11</span>
-        </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">12</span>
-        </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">13</span>
-        </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">14</span>
+        <div id="7" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">7</span>
         </div>
     </div>
     <div class="row">
         <div class></div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">15</span>
+        <div class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span id="8" class="">8</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">16</span>
+        <div class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span id="9" class="">9</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">17</span>
+        <div class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span id="10" class="diasNm">10</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">18</span>
+        <div id="11" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">11</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">19</span>
+        <div id="12" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">12</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">20</span>
+        <div id="13" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">13</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">21</span>
+        <div id="14" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">14</span>
+        </div>
+    </div>
+    <div class="row">
+        <div id="15" class></div>
+        <div class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">15</span>
+            <div id="15">
+
+            </div>
+        </div>
+        <div id="16" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">16</span>
+            <div id="16">
+
+            </div>
+        </div>
+        <div id="17" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">17</span>
+            <div id="17">
+
+            </div>
+        </div>
+        <div id="18" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">18</span>
+            <div id="18">
+
+            </div>
+        </div>
+        <div id="19" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">19</span>
+            <div id="19">
+
+            </div>
+        </div>
+        <div class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">20</span>
+            <div id="20">
+
+            </div>
+        </div>
+        <div id="21" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">21</span>
+            <div id="21">
+
+            </div>
         </div>
     </div>
     <div class="row">
         <div class></div>
 
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">22</span>
+        <div id="22" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">22</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">23</span>
+        <div id="23" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">23</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">24</span>
+        <div id="24" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">24</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">25</span>
+        <div id="25" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">25</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">26</span>
+        <div id="26" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">26</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">27</span>
+        <div id="27" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">27</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">28</span>
+        <div id="28" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">28</span>
         </div>
     </div>
     <div class="row">
         <div class></div>
 
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">29</span>
+        <div id="29" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">29</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">30</span>
+        <div id="30" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">30</span>
         </div>
-        <div class="col-1 border pad btn btn-outline-primary" onclick="addEvento(this)">
-            <span class="diasNm">31</span>
+        <div id="31" class="diasNm col border pad btn btn-outline-primary" onclick="addEvento(this)">
+            <span class="">31</span>
         </div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
     </div>
     </div>
 </body>

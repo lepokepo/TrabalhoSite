@@ -36,7 +36,7 @@ app.get('/eventos', function (req, res) {
             else {
                 results.forEach(element => {
                     var data = element['date_hora']
-                    element['date_hora'] = moment(data).format('LL')
+                    element['date_hora'] = moment(data).format('L, hh:mm:ss')
                     console.log(element['date_hora'])
 
 
@@ -51,10 +51,10 @@ app.get('/eventos', function (req, res) {
 
 app.post('/add_evento', function (req, res) {
     console.log(req.body)
-    req.body.name
-    req.body.data
-    var nomeEvento = _nome
-    var dataEvento = moment(_data).format("ll")
+
+    
+    var nomeEvento = req.body.name
+    var dataEvento = moment(req.body.dt_hr, 'DDMMYYYYHHmm').format()
     connection.query(`insert into evento(nome, date_hora) values('${nomeEvento}', '${dataEvento}')`, function (error, results, fields) {
         if (error)
             res.json;
