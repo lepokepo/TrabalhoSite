@@ -52,14 +52,16 @@ app.get('/eventos', function (req, res) {
 app.post('/add_evento', function (req, res) {
     console.log(req.body)
 
-    
-    var nomeEvento = req.body.name
-    var dataEvento = moment(req.body.dt_hr, 'DDMMYYYYHHmm').format()
+
+    var nomeEvento = req.body.namee
+    var dataEvento = moment(req.body.dt_hr, 'DDMMYYYY HHmm').format()
     connection.query(`insert into evento(nome, date_hora) values('${nomeEvento}', '${dataEvento}')`, function (error, results, fields) {
         if (error)
-            res.json;
-        else
-            res.json(results);
+            return res.send(error);
+
+        res.json({
+            id: results.insertId
+        });
         console.log('executou /add_evento');
     });
 });
