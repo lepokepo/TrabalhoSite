@@ -31,6 +31,13 @@
         }
 
         function enviarPoServer(vari) {
+            var nome = document.getElementById("nometx").value
+            var data = document.getElementById("datatx").value
+
+            let vari = {
+                "nome": nome,
+                "data": data,
+            }
             console.log('Posting...');
             fetch('https://192.168.12.123/add_eventos', {
                 method: 'post',

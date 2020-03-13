@@ -38,8 +38,6 @@ app.get('/eventos', function (req, res) {
                     var data = element['date_hora']
                     element['date_hora'] = moment(data).format('L, hh:mm:ss')
                     console.log(element['date_hora'])
-
-
                 });
                 res.json(results);
                 console.log('executou /eventos')
